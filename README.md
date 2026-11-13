@@ -16,6 +16,7 @@ podman build -t testc
 
 podman run -it --rm testc
 
+new terminal:
+
 podman cp src/ d12633c43655:/workspace
 
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSNAxqSpibcnovONKxUBcvSPm5qdJv/p3pkpen11XpW hu4320an-s@sde-pascal
