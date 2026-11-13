@@ -1,4 +1,4 @@
-# Agent-model-pair-Code-repair-with-custom-tooling-EDAN70
+# Agent-model-Code-repair-with-custom-tooling-EDAN70
 
 ssh maximilian@pascal.cs.lth.se
 
