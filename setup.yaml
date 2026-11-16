@@ -1,0 +1,15 @@
+model:
+  model_name: "openai/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M"
+  cost_tracking: ignore_errors
+  model_kwargs:
+    api_base: "http://localhost:8765/v1"
+    api_key: "llama-cpp"
+    drop_params: true
+    _skip_mcp_handler: true
+environment:
+  environment_class: docker
+  executable: podman
+  image: localhost/official-image:latest   # exact name from `podman images`
+  cwd: /workspace
+  run_args: ["--rm", "--network=none"]
+  timeout: 60
