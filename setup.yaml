@@ -9,7 +9,13 @@ model:
 environment:
   environment_class: docker
   executable: podman
-  image: localhost/official-image:latest   # exact name from `podman images`
+  image: localhost/mount-image:latest   # exact name from `podman images`
   cwd: /workspace
-  run_args: ["--rm", "--network=none"]
+  run_args:
+    - "--rm" 
+    - "--network=none"
+    - "-v"
+    - "./public/workspace:/workspace"
+    - "-w"
+    - "/workspace"
   timeout: 60
