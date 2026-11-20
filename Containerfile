@@ -53,7 +53,23 @@ RUN chmod +x /usr/local/bin/run-tests
 
 # --- Project files ---
 WORKDIR /workspace
-COPY javaTestFiles /workspace
+COPY javaTestFiles /workspace/javaTestFiles
+
+COPY defects4j /defects4j
+
+RUN apt-get update && apt-get install -y cpanminus \
+    && cd ../defects4j \
+    && cpanm --installdeps . \
+    && ./init.sh \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /project_repos/*.git \
+    && rm -f framework/projects/*/active-bugs.csv \
+    && rm -f framework/projects/*/deprecated-bugs.csv
+# Last three remove repos from defect4j, in order to prevent agent
+# from later checking out other projects. 
+# This is handled outside of containers, in the mounted workspace.
+
+ENV PATH="${PATH}:/defects4j/framework/bin"
 
 # --- Maven only: pre-download dependencies and plugins so `mvn -o` works offline ---
 # Skipped automatically if there is no pom.xml. Shared repo path avoids per-user cache issues.
