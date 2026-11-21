@@ -53,7 +53,7 @@ RUN chmod +x /usr/local/bin/run-tests
 
 # --- Project files ---
 WORKDIR /workspace
-COPY javaTestFiles /workspace/javaTestFiles
+#COPY javaTestFiles /workspace/javaTestFiles
 
 COPY defects4j /defects4j
 
@@ -67,7 +67,7 @@ RUN apt-get update && apt-get install -y cpanminus \
     && rm -f framework/projects/*/deprecated-bugs.csv
 # Last three remove repos from defect4j, in order to prevent agent
 # from later checking out other projects. 
-# This is handled outside of containers, in the mounted workspace.
+# Checkout is handled outside of containers, in the mounted workspace.
 
 ENV PATH="${PATH}:/defects4j/framework/bin"
 
@@ -81,5 +81,9 @@ RUN if [ -f pom.xml ]; then \
     mkdir -p /opt/m2 && chmod -R a+rwX /opt/m2
 
 # Default shell
-CMD ["/bin/bash"]]
+CMD ["/bin/bash"]
+
+# Go immediately to the mounted workspace (hopefully)
+CMD ["cd /workspace"] 
+
 
